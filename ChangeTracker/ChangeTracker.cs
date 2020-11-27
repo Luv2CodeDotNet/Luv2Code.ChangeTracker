@@ -20,7 +20,6 @@ namespace ChangeTracker
 
         public List<ChangeTracker> Add<T>(List<ChangeTracker> changesList, T compareObject) where T : class
         {
-            //return TrackChanges(changesList, task, ChangeIdentifier.Add);
             if (changesList is null) throw new NullReferenceException($"Parameter {nameof(changesList)} was null");
             if (compareObject is null) throw new NullReferenceException($"Parameter {nameof(compareObject)} was null");
 
@@ -37,35 +36,21 @@ namespace ChangeTracker
             throw new NotImplementedException();
         }
 
-        public List<ChangeTracker> Remove<T>(List<ChangeTracker> changesList, T task) where T : class
+        public List<ChangeTracker> Remove<T>(List<ChangeTracker> changesList, T compareObject) where T : class
         {
-            return TrackChanges(changesList, task, ChangeIdentifier.Delete);
-        }
+            if (changesList is null) throw new NullReferenceException($"Parameter {nameof(changesList)} was null");
+            if (compareObject is null) throw new NullReferenceException($"Parameter {nameof(compareObject)} was null");
 
-        private static List<ChangeTracker> TrackChanges<T>(List<ChangeTracker> changesList, T task, ChangeIdentifier i) where T : class
-        {
-            var item = new ChangeTracker(task, i);
-            switch (i)
+            var item = new ChangeTracker(compareObject, ChangeIdentifier.Delete);
+            
+            var exist = changesList.Any(c => c.ChangeObject.Equals(compareObject));
+            if (exist)
             {
-                case ChangeIdentifier.Add:
-                {
-                    var any = changesList.Any(c => c.ChangeObject.Equals(task));
-                    if (any) return changesList;
-                    changesList.Add(item);
-                    break;
-                }
-                case ChangeIdentifier.Delete:
-                {
-                    var any = changesList.Any(c => c.ChangeObject.Equals(task));
-                    if (any)
-                        changesList.Remove(item);
-                    else
-                        changesList.Add(item);
-                    break;
-                }
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(i), i, null);
+                var deletedItem = changesList.FirstOrDefault(c => c.ChangeObject.Equals(compareObject));
+                changesList.Remove(deletedItem);
             }
+            else
+                changesList.Add(item);
 
             return changesList;
         }
