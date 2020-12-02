@@ -24,9 +24,16 @@ namespace ChangeTracker
             if (compareObject is null) throw new NullReferenceException($"Parameter {nameof(compareObject)} was null");
 
             var item = new ChangeTracker(compareObject, ChangeIdentifier.Add);
-            
+
             var exists = changesList.Any(c => c.ChangeObject.Equals(compareObject));
-            if (exists) return changesList;
+            if (exists)
+            {
+                var identifier = changesList.FirstOrDefault(c => c.ChangeObject.Equals(compareObject)).ChangeIdentifier;
+                if (identifier == ChangeIdentifier.Delete)
+                    changesList.Remove(changesList.FirstOrDefault(c => c.ChangeObject.Equals(compareObject)));
+                return changesList;
+            }
+
             changesList.Add(item);
             return changesList;
         }

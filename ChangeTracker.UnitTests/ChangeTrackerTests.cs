@@ -141,5 +141,45 @@ namespace ChangeTracker.UnitTests
             
             Assert.Empty(changesList);
         }
+        
+        [Fact]
+        public void Remove_ThenAdd_ReturnList_Empty()
+        {
+            var sut = ChangeTracker;
+            var changesList = new List<ChangeTracker>();
+            var compareObject = new ExampleClass
+            {
+                Id = 1,
+                Prop1 = 2,
+                Prop2 = true,
+                Prop3 = "Hallo",
+                Prop4 = new DateTime(2020, 12, 12)
+            };
+
+            sut.Remove(changesList, compareObject);
+            sut.Add(changesList, compareObject);
+            
+            Assert.Empty(changesList);
+        }
+        
+        [Fact]
+        public void Add_ThenRemove_ReturnList_Empty()
+        {
+            var sut = ChangeTracker;
+            var changesList = new List<ChangeTracker>();
+            var compareObject = new ExampleClass
+            {
+                Id = 1,
+                Prop1 = 2,
+                Prop2 = true,
+                Prop3 = "Hallo",
+                Prop4 = new DateTime(2020, 12, 12)
+            };
+
+            sut.Add(changesList, compareObject);
+            sut.Remove(changesList, compareObject);
+
+            Assert.Empty(changesList);
+        }
     }
 }
