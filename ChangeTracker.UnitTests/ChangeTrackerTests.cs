@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Xunit;
 
 namespace ChangeTracker.UnitTests
@@ -317,6 +318,19 @@ namespace ChangeTracker.UnitTests
 
             var actual = sut.ObjectHasChanges(objOld, objNew);
             Assert.True(actual);
+        }
+        
+        [Fact]
+        public void ObjectHasChanges_ThrowInvalidCastException_IfObjectsTypeIsDifferent()
+        {
+            var sut = ChangeTracker;
+            Assert.Throws<InvalidCastException>(() => sut.ObjectHasChanges<object>(new List<ChangeTracker>(), new List<int>()));
+        }
+        [Fact]
+        public void ChangesListHasChanges_ThrowNullReferenceException_IfChangesListIsNull()
+        {
+            var sut = ChangeTracker;
+            Assert.Throws<NullReferenceException>(() => sut.ChangesListHasChanges(null));
         }
     }
 }
