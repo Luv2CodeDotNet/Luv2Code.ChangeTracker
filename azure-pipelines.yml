@@ -37,4 +37,4 @@ steps:
     command: 'pack'
     packagesToPack: '**/*.csproj'
     nobuild: true
-    versioningScheme: 'byBuildNumber'
+    versioningScheme: 'off'
