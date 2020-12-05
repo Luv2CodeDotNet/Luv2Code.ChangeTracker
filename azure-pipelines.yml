@@ -30,10 +30,11 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: Publish Artifact
   inputs:
-    command: publish
-    publishWebProjects: True
-    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-    zipAfterPublish: True
+    command: 'pack'
+    packagesToPack: '**/*.csproj'
+    nobuild: true
+    versioningScheme: 'off'
+
 
 - task: PublishBuildArtifacts@1
   displayName: Upload Artifact
