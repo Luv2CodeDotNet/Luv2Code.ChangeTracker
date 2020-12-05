@@ -10,5 +10,6 @@
         <Copyright>©Luv2Code 2020</Copyright>
         <RepositoryUrl>https://github.com/Luv2CodeDotNet/ChangeTracker.git</RepositoryUrl>
         <RepositoryType>Library</RepositoryType>
+        <PackageLicenseUrl>https://github.com/Luv2CodeDotNet/ChangeTracker/blob/master/LICENSE</PackageLicenseUrl>
     </PropertyGroup>
 </Project>
