@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <PackageId>Luv2Code.ChangeTracker</PackageId>
-        <PackageVersion>1.0.5</PackageVersion>
+        <PackageVersion>1.0.6</PackageVersion>
         <Title>Luv2Code.ChangeTracker</Title>
         <Authors>Luv2Code.Net</Authors>
         <Description>Tracks local changes of entities, add / update / delete </Description>
