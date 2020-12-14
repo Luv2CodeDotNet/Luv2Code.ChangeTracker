@@ -1,8 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChangeTracker", "ChangeTracker\ChangeTracker.csproj", "{B91B7F28-6F6D-4F00-9B4E-FAA7AAE0EE60}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChangeTracker", "ChangeTracker\ChangeTracker.csproj", "{B91B7F28-6F6D-4F00-9B4E-FAA7AAE0EE60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChangeTracker.UnitTests", "ChangeTracker.UnitTests\ChangeTracker.UnitTests.csproj", "{0ADEFEA0-AE8A-416F-86C0-2B4CBC4443CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChangeTracker.UnitTests", "ChangeTracker.UnitTests\ChangeTracker.UnitTests.csproj", "{0ADEFEA0-AE8A-416F-86C0-2B4CBC4443CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +21,11 @@ Global
 		{0ADEFEA0-AE8A-416F-86C0-2B4CBC4443CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0ADEFEA0-AE8A-416F-86C0-2B4CBC4443CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0ADEFEA0-AE8A-416F-86C0-2B4CBC4443CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {96E9F782-5C38-4088-AC27-4ABA42AD4E06}
 	EndGlobalSection
 EndGlobal

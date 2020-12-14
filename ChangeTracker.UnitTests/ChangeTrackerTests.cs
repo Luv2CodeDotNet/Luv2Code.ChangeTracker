@@ -333,5 +333,54 @@ namespace ChangeTracker.UnitTests
             var sut = ChangeTracker;
             Assert.Throws<NullReferenceException>(() => sut.ChangesListHasChanges(null));
         }
+        
+        [Fact]
+        public void ObjectHasChanges_OnePropIsNull_ReturnTrue()
+        {
+            var sut = ChangeTracker;
+            var objOld = new ExampleClass
+            {
+                Id = 1,
+                Prop1 = 2,
+                Prop2 = true,
+                Prop3 = null,
+                Prop4 = new DateTime(2020, 10, 01)
+            };
+            var objNew = new ExampleClass
+            {
+                Id = 1,
+                Prop1 = 2,
+                Prop2 = true,
+                Prop3 = null,
+                Prop4 = new DateTime(2020, 10, 01)
+            };
+            var actual = sut.ObjectHasChanges(objOld, objNew);
+            
+            Assert.True(actual);
+        }
+        [Fact]
+        public void ObjectHasChanges_OnePropIsNull_ReturnFalse()
+        {
+            var sut = ChangeTracker;
+            var objOld = new ExampleClass
+            {
+                Id = 1,
+                Prop1 = 2,
+                Prop2 = true,
+                Prop3 = "null",
+                Prop4 = new DateTime(2020, 10, 01)
+            };
+            var objNew = new ExampleClass
+            {
+                Id = 1,
+                Prop1 = 2,
+                Prop2 = true,
+                Prop3 = null,
+                Prop4 = new DateTime(2020, 10, 01)
+            };
+            var actual = sut.ObjectHasChanges(objOld, objNew);
+            
+            Assert.False(actual);
+        }
     }
 }

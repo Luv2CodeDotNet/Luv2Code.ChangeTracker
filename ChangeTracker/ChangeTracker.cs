@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace ChangeTracker
 {
@@ -130,19 +132,9 @@ namespace ChangeTracker
             if (typeOld != typeNew)
                 throw new InvalidCastException(
                     $"Parameters have different types. oldValue type : {typeOld}, newValue type : {typeNew}");
-            var hashCodeOld = string.Empty;
 
-            var propsOld = typeOld.GetProperties();
-
-            foreach (var info in propsOld)
-                hashCodeOld += oldObject.GetType().GetProperty(info.Name)?.GetValue(oldObject, null).ToString();
-
-            var hashCodeNew = string.Empty;
-
-            var propsNew = typeOld.GetProperties();
-
-            foreach (var info in propsNew)
-                hashCodeNew += newObject.GetType().GetProperty(info.Name)?.GetValue(newObject, null).ToString();
+            var hashCodeOld = JsonConvert.SerializeObject(oldObject);
+            var hashCodeNew = JsonConvert.SerializeObject(newObject);
 
             return Equals(hashCodeOld, hashCodeNew);
         }
