@@ -291,7 +291,7 @@ namespace ChangeTracker.UnitTests
             };
 
             var actual = sut.ObjectHasChanges(obj, obj);
-            Assert.True(actual);
+            Assert.False(actual);
         }
 
         [Fact]
@@ -316,7 +316,7 @@ namespace ChangeTracker.UnitTests
             };
 
             var actual = sut.ObjectHasChanges(objOld, objNew);
-            Assert.True(actual);
+            Assert.False(actual);
         }
 
         [Fact]
@@ -356,7 +356,7 @@ namespace ChangeTracker.UnitTests
             };
             var actual = sut.ObjectHasChanges(objOld, objNew);
             
-            Assert.True(actual);
+            Assert.False(actual);
         }
         [Fact]
         public void ObjectHasChanges_OnePropIsNull_ReturnFalse()
@@ -380,7 +380,7 @@ namespace ChangeTracker.UnitTests
             };
             var actual = sut.ObjectHasChanges(objOld, objNew);
             
-            Assert.False(actual);
+            Assert.True(actual);
         }
     }
 }

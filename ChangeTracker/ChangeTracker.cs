@@ -136,7 +136,8 @@ namespace ChangeTracker
             var hashCodeOld = JsonConvert.SerializeObject(oldObject);
             var hashCodeNew = JsonConvert.SerializeObject(newObject);
 
-            return Equals(hashCodeOld, hashCodeNew);
+            var result = Equals(hashCodeOld, hashCodeNew);
+            return !result;
         }
     }
 }
