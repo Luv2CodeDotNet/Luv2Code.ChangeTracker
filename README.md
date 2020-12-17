@@ -33,7 +33,7 @@ There are three identifier at the moment.
 ```csharp
     public class Foo
     {
-        private readonly IChangeTracker _changeTracker;
+        private readonly IChangeTracker _changeTracker; 
 
         /// <summary>
         ///     Example class for using change tracker library
