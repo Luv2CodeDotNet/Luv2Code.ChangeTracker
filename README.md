@@ -1,6 +1,6 @@
 # ChangeTracker
 
-This library was build for situations where you need to track changes, especially if you need to save or delete data in the database. Originally i needed to perform some calculation based on user selection (10 checkboxes) and save the output to the database.
+This library was build for situations where you need to track local changes, especially if you need to save or delete data in the database. Originally i needed to perform some calculation based on user selection (10 checkboxes) and save the output to the database.
 
 ## Methods
 * Add
