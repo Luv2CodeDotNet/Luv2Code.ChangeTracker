@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace ChangeTracker.UnitTests
+namespace Luv2Code.ChangeTracker.UnitTests
 {
     public class ChangeTrackerTests
     {

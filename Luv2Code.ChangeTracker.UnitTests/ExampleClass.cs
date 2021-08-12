@@ -1,6 +1,6 @@
 using System;
 
-namespace ChangeTracker.UnitTests
+namespace Luv2Code.ChangeTracker.UnitTests
 {
     public class ExampleClass
     {

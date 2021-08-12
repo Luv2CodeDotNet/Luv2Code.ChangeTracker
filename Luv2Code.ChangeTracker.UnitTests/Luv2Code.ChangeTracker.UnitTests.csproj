@@ -21,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ChangeTracker\ChangeTracker.csproj" />
+      <ProjectReference Include="..\Luv2Code.ChangeTracker\Luv2Code.ChangeTracker.csproj" />
     </ItemGroup>
 
 </Project>

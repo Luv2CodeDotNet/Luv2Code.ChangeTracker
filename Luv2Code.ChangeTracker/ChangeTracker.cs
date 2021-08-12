@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace ChangeTracker
+namespace Luv2Code.ChangeTracker
 {
     /// <summary>
     ///     Is used to track changes in a ChangeTrackerCollection whether it was added, updated or deleted

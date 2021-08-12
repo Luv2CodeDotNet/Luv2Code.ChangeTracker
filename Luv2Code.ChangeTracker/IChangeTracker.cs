@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace ChangeTracker
+namespace Luv2Code.ChangeTracker
 {
     public interface IChangeTracker
     {
