@@ -4,6 +4,6 @@ namespace Luv2Code.ChangeTracker
     {
         Add,
         Update,
-        Delete
+        Remove
     }
 }

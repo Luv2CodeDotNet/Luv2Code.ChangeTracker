@@ -6,11 +6,11 @@ namespace Luv2Code.ChangeTracker.UnitTests
 {
     public class ChangeTrackerTests
     {
-        private static ChangeTracker ChangeTracker
+        private static Changes Changes
         {
             get
             {
-                var sut = new ChangeTracker();
+                var sut = new Changes();
                 return sut;
             }
         }
@@ -27,31 +27,31 @@ namespace Luv2Code.ChangeTracker.UnitTests
                 Prop4 = new DateTime(2020, 12, 12)
             };
 
-            var changeTracker = new ChangeTracker(item, ChangeIdentifier.Add);
+            var changeTracker = new Changes(item, ChangeIdentifier.Add);
 
-            Assert.IsType<ChangeTracker>(changeTracker);
+            Assert.IsType<Changes>(changeTracker);
             Assert.IsType<ExampleClass>(item);
         }
 
         [Fact]
         public void Add_ThrowNullReferenceException_ChangesListIsNull()
         {
-            var sut = ChangeTracker;
+            var sut = Changes;
             Assert.Throws<NullReferenceException>(() => sut.Add(null, new ExampleClass()));
         }
 
         [Fact]
         public void Add_ThrowNullReferenceException_CompareObjectIsNull()
         {
-            var sut = ChangeTracker;
-            Assert.Throws<NullReferenceException>(() => sut.Add<ExampleClass>(new List<ChangeTracker>(), null));
+            var sut = Changes;
+            Assert.Throws<NullReferenceException>(() => sut.Add<ExampleClass>(new List<Changes>(), null));
         }
 
         [Fact]
         public void Add_WithValidValues_Passes()
         {
-            var sut = ChangeTracker;
-            var changesList = new List<ChangeTracker>();
+            var sut = Changes;
+            var changesList = new List<Changes>();
             var compareObject = new ExampleClass
             {
                 Id = 1,
@@ -70,8 +70,8 @@ namespace Luv2Code.ChangeTracker.UnitTests
         [Fact]
         public void Add_ReturnList_IfItemExists()
         {
-            var sut = ChangeTracker;
-            var changesList = new List<ChangeTracker>();
+            var sut = Changes;
+            var changesList = new List<Changes>();
             var compareObject = new ExampleClass
             {
                 Id = 1,
@@ -80,7 +80,7 @@ namespace Luv2Code.ChangeTracker.UnitTests
                 Prop3 = "Hallo",
                 Prop4 = new DateTime(2020, 12, 12)
             };
-            changesList.Add(new ChangeTracker(compareObject, ChangeIdentifier.Add));
+            changesList.Add(new Changes(compareObject, ChangeIdentifier.Add));
 
             var actual = sut.Add(changesList, compareObject);
 
@@ -92,22 +92,22 @@ namespace Luv2Code.ChangeTracker.UnitTests
         [Fact]
         public void Remove_ThrowNullReferenceExeption_ChangesListIsNull()
         {
-            var sut = ChangeTracker;
+            var sut = Changes;
             Assert.Throws<NullReferenceException>(() => sut.Remove(null, new ExampleClass()));
         }
 
         [Fact]
         public void Remove_ThrowNullReferenceException_CompareObjectIsNull()
         {
-            var sut = ChangeTracker;
-            Assert.Throws<NullReferenceException>(() => sut.Remove<ExampleClass>(new List<ChangeTracker>(), null));
+            var sut = Changes;
+            Assert.Throws<NullReferenceException>(() => sut.Remove<ExampleClass>(new List<Changes>(), null));
         }
 
         [Fact]
         public void Remove_WithValidValues_Passes()
         {
-            var sut = ChangeTracker;
-            var changesList = new List<ChangeTracker>();
+            var sut = Changes;
+            var changesList = new List<Changes>();
             var compareObject = new ExampleClass
             {
                 Id = 1,
@@ -127,8 +127,8 @@ namespace Luv2Code.ChangeTracker.UnitTests
         [Fact]
         public void Remove_ReturnList_IfItemExists()
         {
-            var sut = ChangeTracker;
-            var changesList = new List<ChangeTracker>();
+            var sut = Changes;
+            var changesList = new List<Changes>();
             var compareObject = new ExampleClass
             {
                 Id = 1,
@@ -137,7 +137,7 @@ namespace Luv2Code.ChangeTracker.UnitTests
                 Prop3 = "Hallo",
                 Prop4 = new DateTime(2020, 12, 12)
             };
-            changesList.Add(new ChangeTracker(compareObject, ChangeIdentifier.Delete));
+            changesList.Add(new Changes(compareObject, ChangeIdentifier.Remove));
 
             sut.Remove(changesList, compareObject);
 
@@ -147,8 +147,8 @@ namespace Luv2Code.ChangeTracker.UnitTests
         [Fact]
         public void Remove_ThenAdd_ReturnList_Empty()
         {
-            var sut = ChangeTracker;
-            var changesList = new List<ChangeTracker>();
+            var sut = Changes;
+            var changesList = new List<Changes>();
             var compareObject = new ExampleClass
             {
                 Id = 1,
@@ -167,8 +167,8 @@ namespace Luv2Code.ChangeTracker.UnitTests
         [Fact]
         public void Add_ThenRemove_ReturnList_Empty()
         {
-            var sut = ChangeTracker;
-            var changesList = new List<ChangeTracker>();
+            var sut = Changes;
+            var changesList = new List<Changes>();
             var compareObject = new ExampleClass
             {
                 Id = 1,
@@ -187,22 +187,22 @@ namespace Luv2Code.ChangeTracker.UnitTests
         [Fact]
         public void Update_ThrowNullreferenceException_WhenChangesListIsNull()
         {
-            var sut = ChangeTracker;
-            Assert.Throws<NullReferenceException>(() => sut.Update<ExampleClass>(new List<ChangeTracker>(), null));
+            var sut = Changes;
+            Assert.Throws<NullReferenceException>(() => sut.Update<ExampleClass>(new List<Changes>(), null));
         }
 
         [Fact]
         public void Update_ThrowsNullReferenceException_WhenCompareObjectIsNull()
         {
-            var sut = ChangeTracker;
+            var sut = Changes;
             Assert.Throws<NullReferenceException>(() => sut.Update(null, new ExampleClass()));
         }
 
         [Fact]
         public void Update_AddNewItemToChangesList_ItemDontExists_ReturnList_Count_One()
         {
-            var sut = ChangeTracker;
-            var changesList = new List<ChangeTracker>();
+            var sut = Changes;
+            var changesList = new List<Changes>();
             var compareObject = new ExampleClass
             {
                 Id = 1,
@@ -220,8 +220,8 @@ namespace Luv2Code.ChangeTracker.UnitTests
         [Fact]
         public void Update_TryAddExistingItem_ReturnList_Count_One()
         {
-            var sut = ChangeTracker;
-            var changesList = new List<ChangeTracker>();
+            var sut = Changes;
+            var changesList = new List<Changes>();
             var compareObject = new ExampleClass
             {
                 Id = 1,
@@ -231,7 +231,7 @@ namespace Luv2Code.ChangeTracker.UnitTests
                 Prop4 = new DateTime(2020, 12, 12)
             };
 
-            changesList.Add(new ChangeTracker(compareObject, ChangeIdentifier.Update));
+            changesList.Add(new Changes(compareObject, ChangeIdentifier.Update));
 
             sut.Update(changesList, compareObject);
 
@@ -241,46 +241,46 @@ namespace Luv2Code.ChangeTracker.UnitTests
         [Fact]
         public void ChangesListHasChanges_ThrowsNullReferenceException_WhenCompareObjectIsNull()
         {
-            var sut = ChangeTracker;
+            var sut = Changes;
             Assert.Throws<NullReferenceException>(() => sut.ChangesListHasChanges(null));
         }
 
         [Fact]
         public void HasChanges_ReturnsTrue_IfCountGreaterThanZero()
         {
-            var sut = ChangeTracker;
-            var list = new List<ChangeTracker> {new ChangeTracker()};
-            var actual = ChangeTracker.ChangesListHasChanges(list);
+            var sut = Changes;
+            var list = new List<Changes> {new()};
+            var actual = Changes.ChangesListHasChanges(list);
             Assert.True(actual);
         }
 
         [Fact]
         public void HasChanges_ReturnsFalse_IfCountIsZero()
         {
-            var sut = ChangeTracker;
-            var list = new List<ChangeTracker>();
-            var actual = ChangeTracker.ChangesListHasChanges(list);
+            var sut = Changes;
+            var list = new List<Changes>();
+            var actual = Changes.ChangesListHasChanges(list);
             Assert.False(actual);
         }
 
         [Fact]
         public void ObjectHasChanges_ThrowsNullReferenceException_WhenOldObjectIsNull()
         {
-            var sut = ChangeTracker;
+            var sut = Changes;
             Assert.Throws<NullReferenceException>(() => sut.ObjectHasChanges(new ExampleClass(), null));
         }
 
         [Fact]
         public void ObjectHasChanges_ThrowsNullReferenceException_WhenNewObjectIsNull()
         {
-            var sut = ChangeTracker;
+            var sut = Changes;
             Assert.Throws<NullReferenceException>(() => sut.ObjectHasChanges(null, new ExampleClass()));
         }
 
         [Fact]
         public void ObjectHasChanges_ReturnTrueIfObjects_AreSame()
         {
-            var sut = ChangeTracker;
+            var sut = Changes;
             var obj = new ExampleClass
             {
                 Id = 1,
@@ -297,7 +297,7 @@ namespace Luv2Code.ChangeTracker.UnitTests
         [Fact]
         public void ObjectHasChanges_ReturnTrueIfObjects_AreEqual()
         {
-            var sut = ChangeTracker;
+            var sut = Changes;
             var objOld = new ExampleClass
             {
                 Id = 1,
@@ -322,22 +322,22 @@ namespace Luv2Code.ChangeTracker.UnitTests
         [Fact]
         public void ObjectHasChanges_ThrowInvalidCastException_IfObjectsTypeIsDifferent()
         {
-            var sut = ChangeTracker;
+            var sut = Changes;
             Assert.Throws<InvalidCastException>(() =>
-                sut.ObjectHasChanges<object>(new List<ChangeTracker>(), new List<int>()));
+                sut.ObjectHasChanges<object>(new List<Changes>(), new List<int>()));
         }
 
         [Fact]
         public void ChangesListHasChanges_ThrowNullReferenceException_IfChangesListIsNull()
         {
-            var sut = ChangeTracker;
+            var sut = Changes;
             Assert.Throws<NullReferenceException>(() => sut.ChangesListHasChanges(null));
         }
-        
+
         [Fact]
         public void ObjectHasChanges_OnePropIsNull_ReturnTrue()
         {
-            var sut = ChangeTracker;
+            var sut = Changes;
             var objOld = new ExampleClass
             {
                 Id = 1,
@@ -355,13 +355,14 @@ namespace Luv2Code.ChangeTracker.UnitTests
                 Prop4 = new DateTime(2020, 10, 01)
             };
             var actual = sut.ObjectHasChanges(objOld, objNew);
-            
+
             Assert.False(actual);
         }
+
         [Fact]
         public void ObjectHasChanges_OnePropIsNull_ReturnFalse()
         {
-            var sut = ChangeTracker;
+            var sut = Changes;
             var objOld = new ExampleClass
             {
                 Id = 1,
@@ -379,7 +380,7 @@ namespace Luv2Code.ChangeTracker.UnitTests
                 Prop4 = new DateTime(2020, 10, 01)
             };
             var actual = sut.ObjectHasChanges(objOld, objNew);
-            
+
             Assert.True(actual);
         }
     }
