@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
 namespace Luv2Code.ChangeTracker.UnitTests
@@ -382,6 +384,21 @@ namespace Luv2Code.ChangeTracker.UnitTests
             var actual = sut.ObjectHasChanges(objOld, objNew);
 
             Assert.True(actual);
+        }
+
+        [Fact]
+        public void Add_ParameterIsNull_ThrowNullReferenceException()
+        {
+            // Arrange
+            var sut = Changes;
+            var changesList = new List<Changes>();
+            var compareObject = new ExampleClass();
+            var logger = new Logger<ExampleClass>(new NullLoggerFactory());
+
+            // Assert
+            Assert.Throws<NullReferenceException>(() => sut.Add(changesList, compareObject, null));
+            Assert.Throws<NullReferenceException>(() => sut.Add(null, compareObject, logger));
+            Assert.Throws<NullReferenceException>(() => sut.Add<ExampleClass>(changesList, null, logger));
         }
     }
 }

@@ -84,6 +84,7 @@ namespace Luv2Code.ChangeTracker
         /// <exception cref="NullReferenceException">Will thrown if changesList or compareObject are null</exception>
         public List<Changes> Add<T>(List<Changes> changesList, T compareObject, ILogger logger) where T : class
         {
+            if (logger is null) throw new NullReferenceException("ILogger instance was null");
             if (changesList is null)
             {
                 logger.LogError($"Parameter {nameof(changesList)} was null");
@@ -146,7 +147,34 @@ namespace Luv2Code.ChangeTracker
 
         public List<Changes> Update<T>(List<Changes> changesList, T compareObject, ILogger logger) where T : class
         {
-            throw new NotImplementedException();
+            if (logger is null) throw new NullReferenceException("Logger was null");
+            if (changesList is null)
+            {
+                logger.LogError($"Parameter {nameof(changesList)} was null");
+                throw new NullReferenceException($"Parameter {nameof(changesList)} was null");
+            }
+
+            if (compareObject is null)
+            {
+                logger.LogError($"Parameter {nameof(compareObject)} was null");
+                throw new NullReferenceException($"Parameter {nameof(compareObject)} was null");
+            }
+
+            var item = new Changes(compareObject, ChangeIdentifier.Update);
+            logger.LogDebug("New item was created. ChangeIdentifier.Update");
+            var exist = changesList.Any(c => c.ChangeObject.Equals(compareObject));
+            logger.LogDebug("Check item existence against ChangesList.");
+            if (exist)
+            {
+                logger.LogDebug("Item was found.");
+                logger.LogInformation("Changes list returned");
+                return changesList;
+            }
+
+            changesList.Add(item);
+            logger.LogDebug("Item was successfully added to the changes list");
+            logger.LogInformation("Updated list returned");
+            return changesList;
         }
 
         /// <summary>
@@ -181,7 +209,39 @@ namespace Luv2Code.ChangeTracker
 
         public List<Changes> Remove<T>(List<Changes> changesList, T compareObject, ILogger logger) where T : class
         {
-            throw new NotImplementedException();
+            if (logger is null) throw new NullReferenceException("Logger was null");
+            if (changesList is null)
+            {
+                logger.LogError($"Parameter {nameof(changesList)} was null");
+                throw new NullReferenceException($"Parameter {nameof(changesList)} was null");
+            }
+
+            if (compareObject is null)
+            {
+                logger.LogError($"Parameter {nameof(compareObject)} was null");
+                throw new NullReferenceException($"Parameter {nameof(compareObject)} was null");
+            }
+
+            var item = new Changes(compareObject, ChangeIdentifier.Remove);
+            logger.LogDebug("New item was created. ChangeIdentifier.Remove");
+
+            var exist = changesList.Any(c => c.ChangeObject.Equals(compareObject));
+            logger.LogDebug("Check item existence against ChangesList.");
+            if (exist)
+            {
+                logger.LogDebug("Item was found.");
+                var deletedItem = changesList.FirstOrDefault(c => c.ChangeObject.Equals(compareObject));
+                changesList.Remove(deletedItem);
+                logger.LogDebug("Item was removed from the list");
+            }
+            else
+            {
+                changesList.Add(item);
+                logger.LogDebug("Item was successfully added to the changes list");
+            }
+
+            logger.LogInformation("Updated list returned");
+            return changesList;
         }
 
         /// <summary>
@@ -198,7 +258,14 @@ namespace Luv2Code.ChangeTracker
 
         public bool ChangesListHasChanges(List<Changes> changesList, ILogger logger)
         {
-            throw new NotImplementedException();
+            if (logger is null) throw new NullReferenceException("Logger was null");
+            if (changesList is null)
+            {
+                logger.LogError($"Parameter {nameof(changesList)} was null");
+                throw new NullReferenceException($"Parameter {nameof(changesList)} was null");
+            }
+
+            return changesList.Count > 0;
         }
 
         /// <summary>
@@ -231,7 +298,40 @@ namespace Luv2Code.ChangeTracker
 
         public bool ObjectHasChanges<T>(T oldObject, T newObject, ILogger logger) where T : class
         {
-            throw new NotImplementedException();
+            if (logger is null) throw new NullReferenceException("Logger was null");
+            if (oldObject is null)
+            {
+                logger.LogError($"Parameter {nameof(oldObject)} was null");
+                throw new NullReferenceException($"Parameter {nameof(oldObject)} was null");
+            }
+
+            if (newObject is null)
+            {
+                logger.LogError($"Parameter {nameof(newObject)} was null");
+                throw new NullReferenceException($"Parameter {nameof(newObject)} was null");
+            }
+
+            var typeOld = oldObject.GetType();
+            logger.LogDebug($"Type of parameter {nameof(typeOld)}: {typeOld.Name}");
+            var typeNew = newObject.GetType();
+            logger.LogDebug($"Type of parameter {nameof(typeNew)}: {typeNew.Name}");
+            if (typeOld != typeNew)
+            {
+                logger.LogError(
+                    $"Parameters have different types. oldValue type : {typeOld}, newValue type : {typeNew}");
+                throw new InvalidCastException(
+                    $"Parameters have different types. oldValue type : {typeOld}, newValue type : {typeNew}");
+            }
+
+            var hashCodeOld = JsonConvert.SerializeObject(oldObject);
+            logger.LogDebug($"Hashcode for {nameof(oldObject)} was generated");
+            var hashCodeNew = JsonConvert.SerializeObject(newObject);
+            logger.LogDebug($"Hashcode for {nameof(newObject)} was generated");
+
+            logger.LogDebug($"Compare hashcode for {nameof(oldObject)} and {nameof(newObject)}");
+            var result = Equals(hashCodeOld, hashCodeNew);
+            logger.LogInformation($"Comparison is finished: {newObject} has changes: {result}");
+            return !result;
         }
     }
 }
