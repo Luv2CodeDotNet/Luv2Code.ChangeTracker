@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30717.126
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31521.260
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChangeTracker", "ChangeTracker\ChangeTracker.csproj", "{B91B7F28-6F6D-4F00-9B4E-FAA7AAE0EE60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luv2Code.ChangeTracker", "Luv2Code.ChangeTracker\Luv2Code.ChangeTracker.csproj", "{B91B7F28-6F6D-4F00-9B4E-FAA7AAE0EE60}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChangeTracker.UnitTests", "ChangeTracker.UnitTests\ChangeTracker.UnitTests.csproj", "{0ADEFEA0-AE8A-416F-86C0-2B4CBC4443CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Luv2Code.ChangeTracker.UnitTests", "Luv2Code.ChangeTracker.UnitTests\Luv2Code.ChangeTracker.UnitTests.csproj", "{0ADEFEA0-AE8A-416F-86C0-2B4CBC4443CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

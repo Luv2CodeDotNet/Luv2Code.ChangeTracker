@@ -3,10 +3,10 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <PackageId>Luv2Code.ChangeTracker</PackageId>
-        <PackageVersion>1.0.7</PackageVersion>
+        <PackageVersion>2.0.0</PackageVersion>
         <Title>Luv2Code.ChangeTracker</Title>
         <Authors>Luv2Code.Net</Authors>
-        <Description>Tracks local changes of entities, add / update / delete </Description>
+        <Description>Tracks local changes of entities. You can add, update or remove entities.</Description>
         <Copyright>©Luv2Code 2020</Copyright>
         <RepositoryUrl>https://github.com/Luv2CodeDotNet/ChangeTracker.git</RepositoryUrl>
         <RepositoryType>Library</RepositoryType>
@@ -14,10 +14,11 @@
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-      <DocumentationFile>bin\Release\ChangeTracker.xml</DocumentationFile>
+        <DocumentationFile>bin\Release\ChangeTracker.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
     </ItemGroup>
 </Project>

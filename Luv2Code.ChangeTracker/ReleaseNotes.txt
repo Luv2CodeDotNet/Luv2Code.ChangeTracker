@@ -1,0 +1,6 @@
+﻿Version 2.0.0
+
+- Root namespace ChangeTracker  to Luv2Code.ChangeTracker renamed
+- Change identifier 'Delete' to 'Remove' renamed
+- ChangeTracker namespace to Changes namespace renamed
+- Logger capabilities for methods 'Add', 'Update', 'Remove' added 
