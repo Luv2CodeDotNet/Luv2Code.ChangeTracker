@@ -7,10 +7,15 @@ using Newtonsoft.Json;
 namespace Luv2Code.ChangeTracker
 {
     /// <summary>
-    ///     Is used to track changes in a ChangeTrackerCollection whether it was added, updated or deleted
+    ///     Is used to track changes in a ChangeTrackerCollection whether it was added, updated or removed
     /// </summary>
     public readonly struct Changes : IChanges
     {
+        /// <summary>
+        ///     Standard constructor
+        /// </summary>
+        /// <param name="changeObject">Object which should be tracked</param>
+        /// <param name="changeIdentifier">Modifier - Add, Update, Remove</param>
         public Changes(object changeObject, ChangeIdentifier changeIdentifier)
         {
             ChangeObject = changeObject;
@@ -36,7 +41,7 @@ namespace Luv2Code.ChangeTracker
         /// <param name="compareObject">Any class entity</param>
         /// <typeparam name="T">Represents a class</typeparam>
         /// <returns>List of changes</returns>
-        /// <exception cref="NullReferenceException">Will thrown if changesList or compareObject are null</exception>
+        /// <exception cref="NullReferenceException">Will be thrown if changesList or compareObject are null</exception>
         public List<Changes> Add<T>(List<Changes> changesList, T compareObject) where T : class
         {
             // Check if changesList is null
@@ -81,7 +86,7 @@ namespace Luv2Code.ChangeTracker
         /// <param name="logger">Ilogger instance</param>
         /// <typeparam name="T">Represents a class</typeparam>
         /// <returns>List of changes</returns>
-        /// <exception cref="NullReferenceException">Will thrown if changesList or compareObject are null</exception>
+        /// <exception cref="NullReferenceException">Will be thrown if changesList or compareObject are null</exception>
         public List<Changes> Add<T>(List<Changes> changesList, T compareObject, ILogger logger) where T : class
         {
             if (logger is null) throw new NullReferenceException("ILogger instance was null");
@@ -125,13 +130,14 @@ namespace Luv2Code.ChangeTracker
         }
 
         /// <summary>
-        ///     Add identity to changes list if not exists. If entity exists, return changesList
+        ///     Add entity to changes list if entity does not exists.
+        ///     If entity exists, changesList will be returned
         /// </summary>
-        /// <param name="changesList"></param>
-        /// <param name="compareObject"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <param name="changesList">List, where all the changes a saved</param>
+        /// <param name="compareObject">Any class entity</param>
+        /// <typeparam name="T">Represents a class</typeparam>
+        /// <returns>List of changes</returns>
+        /// <exception cref="NullReferenceException">Will be thrown if changesList or compareObject are null</exception>
         public List<Changes> Update<T>(List<Changes> changesList, T compareObject) where T : class
         {
             if (changesList is null) throw new NullReferenceException($"Parameter {nameof(changesList)} was null");
@@ -145,6 +151,16 @@ namespace Luv2Code.ChangeTracker
             return changesList;
         }
 
+        /// <summary>
+        ///     Add entity to changes list if entity does not exists.
+        ///     If entity exists, changesList will be returned
+        /// </summary>
+        /// <param name="changesList">List, where all the changes a saved</param>
+        /// <param name="compareObject">Any class entity</param>
+        /// <param name="logger">Ilogger instance</param>
+        /// <typeparam name="T">Represents a class</typeparam>
+        /// <returns>List of changes</returns>
+        /// <exception cref="NullReferenceException">Will be thrown if changesList or compareObject are null</exception>
         public List<Changes> Update<T>(List<Changes> changesList, T compareObject, ILogger logger) where T : class
         {
             if (logger is null) throw new NullReferenceException("Logger was null");
@@ -178,14 +194,14 @@ namespace Luv2Code.ChangeTracker
         }
 
         /// <summary>
-        ///     Removes entity of type T from changesList if exists.
-        ///     If entity dont exist, adds entity of type T to tracking list with modifier: Remove
+        ///     Removes entity from changesList if exists.
+        ///     If entity does not exist, adds entity to the ChangesList with modifier: Remove
         /// </summary>
-        /// <param name="changesList"></param>
-        /// <param name="compareObject"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns>ChangesList with actual values</returns>
-        /// <exception cref="NullReferenceException"></exception>
+        /// <param name="changesList">List, where all the changes a saved</param>
+        /// <param name="compareObject">Any class entity</param>
+        /// <typeparam name="T">Represents a class</typeparam>
+        /// <returns>List of changes</returns>
+        /// <exception cref="NullReferenceException">Will be thrown if changesList or compareObject are null</exception>
         public List<Changes> Remove<T>(List<Changes> changesList, T compareObject) where T : class
         {
             if (changesList is null) throw new NullReferenceException($"Parameter {nameof(changesList)} was null");
@@ -207,6 +223,16 @@ namespace Luv2Code.ChangeTracker
             return changesList;
         }
 
+        /// <summary>
+        ///     Removes entity from changesList if exists.
+        ///     If entity does not exist, adds entity to the ChangesList with modifier: Remove
+        /// </summary>
+        /// <param name="changesList">List, where all the changes a saved</param>
+        /// <param name="compareObject">Any class entity</param>
+        /// <param name="logger">Ilogger instance</param>
+        /// <typeparam name="T">Represents a class</typeparam>
+        /// <returns>List of changes</returns>
+        /// <exception cref="NullReferenceException">Will be thrown if changesList or compareObject are null</exception>
         public List<Changes> Remove<T>(List<Changes> changesList, T compareObject, ILogger logger) where T : class
         {
             if (logger is null) throw new NullReferenceException("Logger was null");
@@ -245,17 +271,24 @@ namespace Luv2Code.ChangeTracker
         }
 
         /// <summary>
-        ///     Check if changes list has changes, return true or false
+        ///     Check if ChangesList has changes
         /// </summary>
-        /// <param name="changesList"></param>
-        /// <returns></returns>
-        /// <exception cref="NullReferenceException"></exception>
+        /// <param name="changesList">List, where all the changes a saved</param>
+        /// <returns>List of changes</returns>
+        /// <exception cref="NullReferenceException">Will be thrown if changesList or compareObject are null</exception>
         public bool ChangesListHasChanges(List<Changes> changesList)
         {
             if (changesList is null) throw new NullReferenceException($"Parameter {nameof(changesList)} was null");
             return changesList.Count > 0;
         }
 
+        /// <summary>
+        ///     Check if ChangesList has changes
+        /// </summary>
+        /// <param name="changesList">List, where all the changes a saved</param>
+        /// <param name="logger">Ilogger instance</param>
+        /// <returns>List of changes</returns>
+        /// <exception cref="NullReferenceException">Will be thrown if changesList or compareObject are null</exception>
         public bool ChangesListHasChanges(List<Changes> changesList, ILogger logger)
         {
             if (logger is null) throw new NullReferenceException("Logger was null");
@@ -269,14 +302,15 @@ namespace Luv2Code.ChangeTracker
         }
 
         /// <summary>
-        ///     Check if an entity has some property values changed
+        ///     Compare old object with new object. Comparison is on the property level.
+        ///     Each property will be compared.
         /// </summary>
-        /// <param name="oldObject"></param>
-        /// <param name="newObject"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        /// <exception cref="NullReferenceException"></exception>
-        /// <exception cref="InvalidCastException"></exception>
+        /// <param name="oldObject">Source object</param>
+        /// <param name="newObject">Modified object</param>
+        /// <typeparam name="T">Can be any POCO class, has to be a reference type</typeparam>
+        /// <returns>true or false</returns>
+        /// <exception cref="NullReferenceException">Will be thrown if oldObject or newObject are null</exception>
+        /// <exception cref="InvalidCastException">Will be thrown if oldObject or newObject have different types</exception>
         public bool ObjectHasChanges<T>(T oldObject, T newObject) where T : class
         {
             if (oldObject is null) throw new NullReferenceException($"Parameter {nameof(oldObject)} was null");
@@ -296,6 +330,17 @@ namespace Luv2Code.ChangeTracker
             return !result;
         }
 
+        /// <summary>
+        ///     Compare old object with new object. Comparison is on the property level.
+        ///     Each property will be compared.
+        /// </summary>
+        /// <param name="oldObject">Source object</param>
+        /// <param name="newObject">Modified object</param>
+        /// <param name="logger">Ilogger instance</param>
+        /// <typeparam name="T">Can be any POCO class, has to be a reference type</typeparam>
+        /// <returns>true or false</returns>
+        /// <exception cref="NullReferenceException">Will be thrown if oldObject or newObject are null</exception>
+        /// <exception cref="InvalidCastException">Will be thrown if oldObject or newObject have different types</exception>
         public bool ObjectHasChanges<T>(T oldObject, T newObject, ILogger logger) where T : class
         {
             if (logger is null) throw new NullReferenceException("Logger was null");
