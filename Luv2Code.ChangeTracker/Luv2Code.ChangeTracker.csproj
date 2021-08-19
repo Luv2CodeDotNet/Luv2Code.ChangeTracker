@@ -3,10 +3,10 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <PackageId>Luv2Code.ChangeTracker</PackageId>
-        <PackageVersion>1.0.7</PackageVersion>
+        <PackageVersion>2.0.0</PackageVersion>
         <Title>Luv2Code.ChangeTracker</Title>
         <Authors>Luv2Code.Net</Authors>
-        <Description>Tracks local changes of entities, add / update / delete</Description>
+        <Description>Tracks local changes of entities. You can add, update or remove entities.</Description>
         <Copyright>©Luv2Code 2020</Copyright>
         <RepositoryUrl>https://github.com/Luv2CodeDotNet/ChangeTracker.git</RepositoryUrl>
         <RepositoryType>Library</RepositoryType>
